@@ -109,6 +109,8 @@ ARM_PRIVATE(
 )
     /* place your public member here */
         ref_gui_t *ptGUI;    
+        uint16_t  iY;
+        bool      bclose;
 };
 
 /*============================ GLOBAL VARIABLES ==============================*/

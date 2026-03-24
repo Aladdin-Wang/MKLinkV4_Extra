@@ -8,6 +8,11 @@
 #endif
 #include "board.h"
 
+#define AXIS_INPUT
+
+
+
+#define PI 3.1415926
 int g_scale = 5;
 int g_canvasWidth = 60;
 int g_canvasHeight = 60;
@@ -15,6 +20,8 @@ float cScale = 0.0f;
 
 static ATTR_RAMFUNC uint8_t fluid_mem[96*1024];
 Scene scene;  // 全局场景实例
+
+
 
 // 创建流体模拟实例
 Fluid * Fluid_create(int numX, int numY, float h) {
@@ -75,6 +82,19 @@ void Fluid_free(Fluid *f) {
 	free(f);
 }
 
+
+//void deal_with_8688_angle(Fluid *f, float dt, float gravity) {
+//   static float old_pitch = 0, old_roll = 0;
+//   float ax = qmi8658_read_acc_x() / 16384.0f; // QMI8658默认±2g量程，除以16384转成g单位
+//   float ay = qmi8658_read_acc_y() / 16384.0f;
+//   float az = qmi8658_read_acc_z() / 16384.0f;
+
+//   // 2. 算倾角，静态精度±0.5°完全够用
+
+//   scene.sinW = (-ax) / sqrtf(ax*ax + az*az);
+//   // 3. 低通滤波防抖动，系数0.1/0.9可以自己调，值越小越稳但响应越慢
+
+//}
 // 积分：应用重力
 void Fluid_integrate(Fluid *f, float dt, float gravity) {
 	int n = f->numY;
@@ -87,6 +107,7 @@ void Fluid_integrate(Fluid *f, float dt, float gravity) {
 		}
 	}
 }
+
 
 // 压力求解：保证不可压缩性
 void Fluid_solveIncompressibility(Fluid *f, int numIters, float dt) {
@@ -266,16 +287,58 @@ void Fluid_advectTemperature(Fluid *f, float dt) {
 // 更新火焰效果
 void Fluid_updateFire(Fluid *f, float dt) {
 	float h = f->h;
-	float swirlTimeSpan = 1.0f;          // 旋涡寿命
+	float swirlTimeSpan = 1.0f;           // 旋涡寿命
 	float swirlOmega = 20.0f;             // 旋涡角速度
 	float swirlDamping = 10.0f * dt;      // 旋涡阻尼
 	float swirlProbability = scene.swirlProbability * h * h;  // 旋涡生成概率
 	float fireCooling =  1.2f * dt;        // 火焰冷却速度
 	float smokeCooling = 0.4f * dt;       // 烟雾冷却速度
 	float lift = 3.5f;                     // 火焰升力
+        float k_motion = 5.0;
+        extern float_t DATA_GY_ACC[6];
+        #ifdef AXIS_INPUT
+
+        float ax, ay, az;
+        ax = DATA_GY_ACC[0];
+        ay = DATA_GY_ACC[1];
+        az = DATA_GY_ACC[2];
+
+        // 
+        static float gxf = 0;
+        static float gyf = 0;
+        static float gzf = 0;
+
+
+        float Ylift,Xlift = 0;
+
+        float alpha = 0.1f;      //重力部分低通滤波
+
+        gxf = (1 - alpha) * gxf + alpha * ax;
+        gyf = (1 - alpha) * gyf + alpha * ay;
+        gzf = (1 - alpha) * gzf + alpha * az;
+
+        float norm = sqrtf(gyf*gyf + gzf*gzf) + 1e-6f;
+        float gx = gyf / norm;   //棱镜反射平面内的水平和竖直加速度方向
+        float gy = gzf / norm;
+        
+        float lin_x = ay - gyf;   //分离出高速抖动
+        float lin_y = az - gzf;
+
+        float lift_x = gx;
+        float lift_y = gy;
+
+        if(az < -0.1){
+            Ylift = -sqrt(1 - (lift_x * lift_x)) * lift;
+        }else{
+            Ylift =  sqrt(1 - (lift_x * lift_x)) * lift;
+        }
+            Xlift = lift_x * lift;    
+
+        #endif
+
 	float acceleration = 5.0f * dt;        // 加速度
 	float kernelRadius = scene.swirlMaxRadius;  // 旋涡影响半径
-	
+
 	int n = f->numY;
 	float maxX = (f->numX - 1) * f->h;
 	float maxY = (f->numY - 1) * f->h;
@@ -358,9 +421,19 @@ void Fluid_updateFire(Fluid *f, float dt) {
 			f->t[i * n + j] = fmaxf(t - cooling, 0.0f);
 			float u = f->u[i * n + j];
 			float v = f->v[i * n + j];
-			float targetV = t * lift;
-			f->v[i * n + j] += (targetV - v) * acceleration;
-			
+              #ifdef AXIS_INPUT
+                    float targetV = t * Ylift - k_motion * lin_y;
+                    float targetU = t * Xlift + k_motion * lin_x;
+                    f->v[i * n + j] += (targetV - v) * acceleration;
+                    f->u[i * n + j] += (targetU - u) * acceleration;
+
+              #else
+                    float targetV =  t * lift;
+                    f->v[i * n + j] += (targetV - v) * acceleration;
+
+
+              #endif
+	
 			int numNewSwirls = 0;
 			
 			// 燃烧环（改为椭圆形，底部更宽）
@@ -370,7 +443,12 @@ void Fluid_updateFire(Fluid *f, float dt) {
 				float dxWide = dx * 0.5f;  // 水平方向压缩，形成椭圆
 				float d = dxWide * dxWide + dy * dy;
 				if (d < maxR * maxR) {
-					f->t[i * n + j] = 1.0f;
+                                        if(scene.close){
+                                           f->t[i * n + j] = 0.0f;
+                                        }else{
+                                           f->t[i * n + j] = 1.0f;
+                                        }
+
 					if (((double)rand() / RAND_MAX) < 0.5f * swirlProbability) {
 						numNewSwirls++;
 					}
@@ -463,6 +541,55 @@ uint16_t getFireColor_RGB565_Q12(float val)
     return (R<<11)|(G<<5)|B;
 }
 
+uint16_t getFireColor_BlueGas_RGB565(float val)
+{
+    // 🔥 黑背景
+    if (val <= 0.05f) return 0x0000;
+    if (val > 1.0f) val = 1.0f;
+
+    // 🔥 提高对比度（但不要太狠）
+    val = val * val;
+
+    float fr, fg, fb;
+
+    if (val < 0.3f) {
+        // 🔴 外层（很弱的红/暗）
+        float s = val / 0.3f;
+        fr = 0.4f * s;
+        fg = 0.05f * s;
+        fb = 0.1f * s;
+    } 
+    else if (val < 0.6f) {
+        // 🔵 蓝区（降低纯蓝，偏青一点）
+        float s = (val - 0.3f) / 0.3f;
+        fr = 0.0f;
+        fg = 0.2f * s;       // 加一点绿 → 更真实
+        fb = 0.6f + 0.4f * s; // 蓝但不过饱和
+    } 
+    else if (val < 0.85f) {
+        // 🔵→⚪ 蓝白过渡（关键！）
+        float s = (val - 0.6f) / 0.25f;
+        fr = 0.3f * s;
+        fg = 0.4f + 0.6f * s;
+        fb = 1.0f;
+    } 
+    else {
+        // ⚪ 白核（高温）
+        float s = (val - 0.85f) / 0.15f;
+        fr = 0.8f + 0.2f * s;
+        fg = 0.9f + 0.1f * s;
+        fb = 1.0f;
+    }
+
+    uint16_t R = (uint16_t)(fr * 31.0f);
+    uint16_t G = (uint16_t)(fg * 63.0f);
+    uint16_t B = (uint16_t)(fb * 31.0f);
+
+    return (R << 11) | (G << 5) | B;
+}
+
+
+
 uint16_t getFireColor_RGB565_Q12_gpt_version(float val)
 {
     // clamp
@@ -505,6 +632,78 @@ uint16_t getFireColor_RGB565_Q12_gpt_version(float val)
     }
 
     // ===== 转 RGB565 =====
+    uint16_t R = (uint16_t)(fr * 31.0f);
+    uint16_t G = (uint16_t)(fg * 63.0f);
+    uint16_t B = (uint16_t)(fb * 31.0f);
+
+    return (R << 11) | (G << 5) | B;
+}
+
+
+uint16_t getFireColor_Fireplace_Smoke(float val)
+{
+    // ===== 轻微闪烁 =====
+    val += ((rand() & 0xFF) / 255.0f - 0.5f) * 0.02f;
+
+    // clamp
+    if (val < 0.0f) val = 0.0f;
+    if (val > 1.0f) val = 1.0f;
+
+    // ===== 对比度 =====
+    val = val * val;
+
+    float fr, fg, fb;
+    // ===== ① 烟雾区（改成灰白🔥）=====
+    //if (val < 0.2f) {
+    //    val = val * val * 0.9f;
+    //    float s = val / 0.2f;
+
+    //    // 关键：提升亮度 + 偏灰白
+    //    fr = 0.15f + 0.35f * s;
+    //    fg = 0.15f + 0.35f * s;
+    //    fb = 0.18f + 0.40f * s;   // 微微偏蓝（像烟）
+    //}
+    if (val < 0.25f) {
+        float s = val / 0.25f;
+
+        // 🔥 平滑（去颗粒）
+        s = s * s * (3.0f - 2.0f * s);   // smoothstep
+
+        // 🔥 关键：加“底亮度”（否则黑背景看不见）
+        float base = 0.12f;   // 👈 这个就是烟能不能看见的关键
+
+        fr = base + 0.35f * s;
+        fg = base + 0.35f * s;
+        fb = base + 0.38f * s;   // 微偏冷一点像烟
+    }
+    // ===== ② 外焰红 =====
+    else if (val < 0.4f) {
+        float s = (val - 0.2f) / 0.2f;
+
+        fr = 0.6f + 0.4f * s;
+        fg = 0.05f + 0.10f * s;
+        fb = 0.01f;
+    }
+
+    // ===== ③ 橙色主体 =====
+    else if (val < 0.7f) {
+        float s = (val - 0.4f) / 0.3f;
+
+        fr = 1.0f;
+        fg = 0.2f + 0.6f * s;
+        fb = 0.02f;
+    }
+
+    // ===== ④ 暖白核心 =====
+    else {
+        float s = (val - 0.7f) / 0.3f;
+        s = s * s;
+
+        fr = 1.0f;
+        fg = 0.75f + 0.25f * s;
+        fb = 0.03f + 0.10f * s;
+    }
+
     uint16_t R = (uint16_t)(fr * 31.0f);
     uint16_t G = (uint16_t)(fg * 63.0f);
     uint16_t B = (uint16_t)(fb * 31.0f);
@@ -704,7 +903,7 @@ int fire_init() {   //在场景初始化处调用
 	scene.frameNr = 0;
 	scene.obstacleX = 0.0f;
 	scene.obstacleY = 0.0f;
-	scene.obstacleRadius = 0.2f;
+	scene.obstacleRadius = 0.1f;
 	scene.burningObstacle = 1;
 	scene.burningFloor = 0;
 	scene.paused = 0;

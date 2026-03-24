@@ -6,7 +6,7 @@
 static char qmi8658_stack[4096];
 static struct rt_thread usb_qmi8658_thread;
 
-static float_t DATA_GY_ACC[6];
+float_t DATA_GY_ACC[6];
 static void qmi8658_thread_entry(void *parameter)
 {
     int qmi8658_init_ret = QMI8658A_Init();

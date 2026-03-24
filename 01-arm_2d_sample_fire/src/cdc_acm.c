@@ -220,7 +220,7 @@ int __SEGGER_RTL_X_file_write(__SEGGER_RTL_FILE *file, const char *data, unsigne
         queue_init(&tConsoleQueue, chConsoleBuffer, sizeof(chConsoleBuffer));
     }
     enqueue(&tConsoleQueue, data, size);
-    if(ep_tx_busy_flag == false ){
+    if(ep_tx_busy_flag == false && dtr_enable == 1){
         uint16_t len = dequeue(&tConsoleQueue, chCdcSendBuffer, get_queue_count(&tConsoleQueue));   
         usbd_ep_start_write(0, CDC_IN_EP, chCdcSendBuffer, len);
         ep_tx_busy_flag = true;
