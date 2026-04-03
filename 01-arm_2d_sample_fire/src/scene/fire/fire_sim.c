@@ -10,8 +10,6 @@
 
 #define AXIS_INPUT
 
-
-
 #define PI 3.1415926
 int g_scale = 5;
 int g_canvasWidth = 60;
@@ -20,8 +18,6 @@ float cScale = 0.0f;
 
 static ATTR_RAMFUNC uint8_t fluid_mem[96*1024];
 Scene scene;  // 全局场景实例
-
-
 
 // 创建流体模拟实例
 Fluid * Fluid_create(int numX, int numY, float h) {
