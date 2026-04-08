@@ -575,21 +575,17 @@ int MSD0_GetCardInfo(PMSD_CARDINFO SD0_CardInfo)
 
 hpm_stat_t __spi_read_multi_block(uint8_t *buffer, uint32_t start_sector, uint32_t num_sectors)
 {
-   //rt_mutex_take(&g_disk_mutex, RT_WAITING_FOREVER);
    uint32_t level = disable_global_irq(CSR_MSTATUS_MIE_MASK);   
    hpm_stat_t stat = sdcard_spi_read_multi_block(buffer,start_sector,num_sectors);
    restore_global_irq(level);
-   //rt_mutex_release(&g_disk_mutex);
    return stat;
 }
 
 hpm_stat_t __spi_write_multi_block(uint8_t *buffer, uint32_t sector, uint32_t num_sectors)
 {
-    //rt_mutex_take(&g_disk_mutex, RT_WAITING_FOREVER);
     uint32_t level = disable_global_irq(CSR_MSTATUS_MIE_MASK);
     hpm_stat_t stat = sdcard_spi_write_multi_block(buffer,sector,num_sectors);
     restore_global_irq(level);
-    //rt_mutex_release(&g_disk_mutex);
     return stat;
 }
 

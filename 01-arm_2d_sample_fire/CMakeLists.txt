@@ -35,7 +35,6 @@ if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.version)
     set(CONFIG_BUILD_VERSION ${BUILD_VERSION})
 endif ()
 
-
 sdk_app_inc(${CMAKE_CURRENT_SOURCE_DIR})
 sdk_app_inc(../external/Arm-2D/Library/Include)
 sdk_app_inc(../external/Arm-2D/Helper/Include)
@@ -133,12 +132,13 @@ sdk_app_src_glob(../external/MicroBootLoader/source/check_agent_engine/*.c)
 sdk_app_src_glob(../external/MicroBootLoader/source/communication/*.c)
 sdk_app_src_glob(../external/MicroBootLoader/source/generic/*.c)
 sdk_app_src_glob(../external/MicroBootLoader/source/IPC/event/*.c)
-sdk_app_src(../common/lcd/arm2d_port/arm_2d_disp_adapter_0.h)
 sdk_app_src(config/user_app_cfg.h)
 sdk_app_src(config/arm_2d_cfg.h)
 sdk_app_src(config/rtconfig.h)
 sdk_app_src(config/rg_app_cfg.h)
 sdk_app_src(config/perfc_port_user.c)
+sdk_app_src(config/arm_2d_disp_adapter_0.h)
+sdk_app_src(config/arm_2d_disp_adapter_0.c)
 
 # swj_clock default use keil swd frequency boost
 sdk_compile_definitions(-DBOOST_KEIL_SWD_FREQ=0)

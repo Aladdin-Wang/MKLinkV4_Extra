@@ -42,7 +42,7 @@ int main(void)
     Power_PWM_Init();
     key_init();
     key_encoder_init();
-    qmi8658_task_init();
+    //qmi8658_task_init();
     arm_2d_scene_app_player_init();
 
     while(1) {
