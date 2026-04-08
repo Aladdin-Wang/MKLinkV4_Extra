@@ -1,0 +1,1 @@
+python uf2conv.py MicroLink.bin -f 0x0A4D5048 -b 0x80023000 -c -o MicroLink.uf2
