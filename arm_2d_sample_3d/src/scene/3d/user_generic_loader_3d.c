@@ -301,7 +301,7 @@ void ThD_sim_on_load( ThD_sim_t *ptThis)
      //for(uint16_t i = 0;i < 2504;i ++){
      //    earth_model_vertices[i] = yz_rotate(earth_model_vertices[i],Q31(-0.25));
      //}   
-     for(uint16_t i = 0;i < 2504;i ++){
+     for(uint16_t i = 0;i < 1032;i ++){
          j20_model_vertices[i] = yz_rotate(j20_model_vertices[i],Q31(-0.25));
      }   
     arm_generic_loader_on_load(&this.use_as__arm_generic_loader_t);
@@ -311,19 +311,19 @@ ARM_NONNULL(1)
 void ThD_sim_on_frame_start( ThD_sim_t *ptThis)
 {
     assert(NULL != ptThis);
-    this.xz_rad +=  Q31(0.01);
-    if(this.xz_rad > Q31(0.999)){
-       this.xz_rad = 0;
-    }
+    //this.xz_rad +=  Q31(0.01);
+    //if(this.xz_rad > Q31(0.999)){
+    //   this.xz_rad = 0;
+    //}
     //arm_2d_helper_time_liner_slider(0,1000,1000,theta);
     //theta = Q31(0.005);
     //for(uint16_t i = 0;i < 2504;i ++){
     //    earth_model_vertices[i] = xz_rotate(earth_model_vertices[i],theta);
     //}
-    //theta = Q31(0.01);
-    //for(uint16_t i = 0;i < 2056;i ++){
-    //    earth_model_vertices[i] = xz_rotate(earth_model_vertices[i],theta);
-    //}
+    q31_t theta = Q31(0.01);
+    for(uint16_t i = 0;i < 1032;i ++){
+        j20_model_vertices[i] = xz_rotate(j20_model_vertices[i],theta);
+    }
     //arm_generic_loader_on_frame_start(&this.use_as__arm_generic_loader_t);
 }
 
@@ -368,11 +368,11 @@ arm_2d_err_t __ThD_sim_draw(  arm_generic_loader_t *ptObj,
          arm_2d_user_draw_line_api_params_t tParam_2;  
          arm_2d_user_draw_line_api_params_t tParam_3;  
 
-         to_screen(projection(j20_model_vertices[j20_model_tris[i].i0],this.xz_rad,0),&tParam_1.tStart);
-         to_screen(projection(j20_model_vertices[j20_model_tris[i].i1],this.xz_rad,0),&tParam_1.tEnd);
+         to_screen(projection(j20_model_vertices[j20_model_tris[i].i0],0,0),&tParam_1.tStart);
+         to_screen(projection(j20_model_vertices[j20_model_tris[i].i1],0,0),&tParam_1.tEnd);
          tParam_2.tStart.iX = tParam_1.tEnd.iX;
          tParam_2.tStart.iY = tParam_1.tEnd.iY;
-         to_screen(projection(j20_model_vertices[j20_model_tris[i].i2],this.xz_rad,0),&tParam_2.tEnd);
+         to_screen(projection(j20_model_vertices[j20_model_tris[i].i2],0,0),&tParam_2.tEnd);
          tParam_3.tStart.iX = tParam_2.tEnd.iX;
          tParam_3.tStart.iY = tParam_2.tEnd.iY;
          tParam_3.tEnd.iX = tParam_1.tStart.iX;
