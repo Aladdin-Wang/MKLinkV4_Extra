@@ -1,0 +1,466 @@
+
+/* Generated on Mon Dec  1 16:12:21 2025 from -i */
+/* Re-sized : False */
+/* Rotated : 0.0 deg */
+
+
+
+#include "arm_2d.h"
+
+#if defined(__clang__)
+#   pragma clang diagnostic push
+#   pragma clang diagnostic ignored "-Wunknown-warning-option"
+#   pragma clang diagnostic ignored "-Wreserved-identifier"
+#   pragma clang diagnostic ignored "-Wmissing-variable-declarations"
+#   pragma clang diagnostic ignored "-Wcast-qual"
+#elif defined(__IS_COMPILER_ARM_COMPILER_5__)
+#   pragma diag_suppress=1296
+#endif
+
+
+ARM_ALIGN(4) ARM_SECTION("arm2d.asset.c_bmpSmallFlashAlpha")
+static const uint8_t c_bmpSmallFlashAlpha[7*16] = {
+/* -0- */
+0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 
+/* -1- */
+0x00, 0x00, 0x00, 0x0b, 0x81, 0x00, 0x00, 
+/* -2- */
+0x00, 0x00, 0x00, 0x78, 0x6e, 0x00, 0x00, 
+/* -3- */
+0x00, 0x00, 0x10, 0xee, 0x43, 0x00, 0x00, 
+/* -4- */
+0x00, 0x00, 0x85, 0xff, 0x19, 0x00, 0x00, 
+/* -5- */
+0x00, 0x17, 0xf4, 0xed, 0x00, 0x00, 0x00, 
+/* -6- */
+0x00, 0x92, 0xff, 0xcf, 0x27, 0x28, 0x26, 
+/* -7- */
+0x1f, 0xf8, 0xff, 0xff, 0xff, 0xff, 0xa8, 
+/* -8- */
+0x9f, 0xff, 0xff, 0xff, 0xff, 0xfc, 0x28, 
+/* -9- */
+0x35, 0x38, 0x38, 0xd0, 0xff, 0x9f, 0x00, 
+/* -10- */
+0x00, 0x00, 0x00, 0xe7, 0xf9, 0x20, 0x00, 
+/* -11- */
+0x00, 0x00, 0x10, 0xff, 0x95, 0x00, 0x00, 
+/* -12- */
+0x00, 0x00, 0x38, 0xf5, 0x1a, 0x00, 0x00, 
+/* -13- */
+0x00, 0x00, 0x60, 0x8b, 0x00, 0x00, 0x00, 
+/* -14- */
+0x00, 0x00, 0x79, 0x14, 0x00, 0x00, 0x00, 
+/* -15- */
+0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0x00, 
+};
+
+
+ARM_ALIGN(4) ARM_SECTION("arm2d.asset.c_bmpSmallFlashA1Alpha")
+static const uint8_t c_bmpSmallFlashA1Alpha[1*16] = {
+/* -0- */
+0x00, 
+/* -1- */
+0x10, 
+/* -2- */
+0x00, 
+/* -3- */
+0x08, 
+/* -4- */
+0x0c, 
+/* -5- */
+0x0c, 
+/* -6- */
+0x0e, 
+/* -7- */
+0x7e, 
+/* -8- */
+0x3f, 
+/* -9- */
+0x38, 
+/* -10- */
+0x18, 
+/* -11- */
+0x18, 
+/* -12- */
+0x08, 
+/* -13- */
+0x08, 
+/* -14- */
+0x00, 
+/* -15- */
+0x00, 
+};
+
+ARM_ALIGN(4) ARM_SECTION("arm2d.asset.c_bmpSmallFlashA2Alpha")
+static const uint8_t c_bmpSmallFlashA2Alpha[2*16] = {
+/* -0- */
+0x00, 0x00, 
+/* -1- */
+0x00, 0x02, 
+/* -2- */
+0x40, 0x01, 
+/* -3- */
+0xc0, 0x01, 
+/* -4- */
+0xe0, 0x00, 
+/* -5- */
+0xf0, 0x00, 
+/* -6- */
+0xf8, 0x00, 
+/* -7- */
+0xfc, 0x2f, 
+/* -8- */
+0xfe, 0x0f, 
+/* -9- */
+0xc0, 0x0b, 
+/* -10- */
+0xc0, 0x03, 
+/* -11- */
+0xc0, 0x02, 
+/* -12- */
+0xc0, 0x00, 
+/* -13- */
+0x90, 0x00, 
+/* -14- */
+0x10, 0x00, 
+/* -15- */
+0x00, 0x00, 
+};
+
+
+ARM_ALIGN(4) ARM_SECTION("arm2d.asset.c_bmpSmallFlashA4Alpha")
+static const uint8_t c_bmpSmallFlashA4Alpha[4*16] = {
+/* -0- */
+0x00, 0x00, 0x03, 0x00, 
+/* -1- */
+0x00, 0x00, 0x08, 0x00, 
+/* -2- */
+0x00, 0x70, 0x06, 0x00, 
+/* -3- */
+0x00, 0xe1, 0x04, 0x00, 
+/* -4- */
+0x00, 0xf8, 0x01, 0x00, 
+/* -5- */
+0x10, 0xef, 0x00, 0x00, 
+/* -6- */
+0x90, 0xcf, 0x22, 0x02, 
+/* -7- */
+0xf1, 0xff, 0xff, 0x0a, 
+/* -8- */
+0xf9, 0xff, 0xff, 0x02, 
+/* -9- */
+0x33, 0xd3, 0x9f, 0x00, 
+/* -10- */
+0x00, 0xe0, 0x2f, 0x00, 
+/* -11- */
+0x00, 0xf1, 0x09, 0x00, 
+/* -12- */
+0x00, 0xf3, 0x01, 0x00, 
+/* -13- */
+0x00, 0x86, 0x00, 0x00, 
+/* -14- */
+0x00, 0x17, 0x00, 0x00, 
+/* -15- */
+0x00, 0x03, 0x00, 0x00, 
+};
+
+
+
+ARM_SECTION("arm2d.asset.c_bmpSmallFlashGRAY8")
+const uint8_t c_bmpSmallFlashGRAY8[7*16] = {
+/* -0- */
+0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 
+/* -1- */
+0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 
+/* -2- */
+0x00, 0x00, 0x00, 0x02, 0x02, 0x00, 0x00, 
+/* -3- */
+0x00, 0x00, 0x00, 0x01, 0x03, 0x00, 0x00, 
+/* -4- */
+0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+/* -5- */
+0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+/* -6- */
+0x00, 0x01, 0x00, 0x00, 0x06, 0x06, 0x06, 
+/* -7- */
+0x05, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 
+/* -8- */
+0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+/* -9- */
+0x04, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 
+/* -10- */
+0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 
+/* -11- */
+0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 
+/* -12- */
+0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 
+/* -13- */
+0x00, 0x00, 0x02, 0x01, 0x00, 0x00, 0x00, 
+/* -14- */
+0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 
+/* -15- */
+0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00, 
+};
+
+ARM_SECTION("arm2d.asset.c_bmpSmallFlashRGB565")
+const uint16_t c_bmpSmallFlashRGB565[7*16] = {
+/* -0- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0020, 0x0000, 0x0000, 
+/* -1- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -2- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -3- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -4- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -5- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -6- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0020, 0x0020, 0x0020, 
+/* -7- */
+0x0801, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -8- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -9- */
+0x0020, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -10- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -11- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -12- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -13- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -14- */
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+/* -15- */
+0x0000, 0x0000, 0x0020, 0x0000, 0x0000, 0x0000, 0x0000, 
+};
+
+ARM_SECTION("arm2d.asset.c_bmpSmallFlashCCCA8888")
+const uint32_t c_bmpSmallFlashCCCA8888[7*16] = {
+/* -0- */
+0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x30050505, 0x00000000, 0x00000000, 
+/* -1- */
+0x00000000, 0x00000000, 0x00000000, 0x0b000000, 0x81010101, 0x00000000, 0x00000000, 
+/* -2- */
+0x00000000, 0x00000000, 0x00000000, 0x78020202, 0x6e020202, 0x00000000, 0x00000000, 
+/* -3- */
+0x00000000, 0x00000000, 0x10000000, 0xee010101, 0x43030303, 0x00000000, 0x00000000, 
+/* -4- */
+0x00000000, 0x00000000, 0x85010101, 0xff000000, 0x19000000, 0x00000000, 0x00000000, 
+/* -5- */
+0x00000000, 0x17000000, 0xf4010101, 0xed000000, 0x00000000, 0x00000000, 0x00000000, 
+/* -6- */
+0x00000000, 0x92010101, 0xff000000, 0xcf000000, 0x27060606, 0x28060606, 0x26060606, 
+/* -7- */
+0x1f080008, 0xf8010101, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xa8010101, 
+/* -8- */
+0x9f010101, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xfc000000, 0x28000000, 
+/* -9- */
+0x35040404, 0x38000000, 0x38000000, 0xd0010101, 0xff000000, 0x9f000000, 0x00000000, 
+/* -10- */
+0x00000000, 0x00000000, 0x00000000, 0xe7010101, 0xf9000000, 0x20000000, 0x00000000, 
+/* -11- */
+0x00000000, 0x00000000, 0x10000000, 0xff000000, 0x95010101, 0x00000000, 0x00000000, 
+/* -12- */
+0x00000000, 0x00000000, 0x38000000, 0xf5010101, 0x1a000000, 0x00000000, 0x00000000, 
+/* -13- */
+0x00000000, 0x00000000, 0x60020202, 0x8b010101, 0x00000000, 0x00000000, 0x00000000, 
+/* -14- */
+0x00000000, 0x00000000, 0x79020202, 0x14000000, 0x00000000, 0x00000000, 0x00000000, 
+/* -15- */
+0x00000000, 0x00000000, 0x32050505, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
+};
+
+
+extern const arm_2d_tile_t c_tileSmallFlashGRAY8;
+ARM_SECTION("arm2d.tile.c_tileSmallFlashGRAY8")
+const arm_2d_tile_t c_tileSmallFlashGRAY8 = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_COLOUR_GRAY8,
+        },
+    },
+    .pchBuffer = (uint8_t*)c_bmpSmallFlashGRAY8,
+};
+
+
+
+
+extern const arm_2d_tile_t c_tileSmallFlashRGB565;
+ARM_SECTION("arm2d.tile.c_tileSmallFlashRGB565")
+const arm_2d_tile_t c_tileSmallFlashRGB565 = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_COLOUR_RGB565,
+        },
+    },
+    .phwBuffer = (uint16_t*)c_bmpSmallFlashRGB565,
+};
+
+
+
+
+extern const arm_2d_tile_t c_tileSmallFlashCCCA8888;
+
+ARM_SECTION("arm2d.tile.c_tileSmallFlashCCCA8888")
+const arm_2d_tile_t c_tileSmallFlashCCCA8888 = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_COLOUR_BGRA8888,
+        },
+    },
+    .pwBuffer = (uint32_t*)c_bmpSmallFlashCCCA8888,
+};
+
+
+
+
+
+extern const arm_2d_tile_t c_tileSmallFlashMask2;
+
+ARM_SECTION("arm2d.tile.c_tileSmallFlashMask2")
+const arm_2d_tile_t c_tileSmallFlashMask2 = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_CHANNEL_8in32,
+        },
+    },
+    .nAddress = ((intptr_t)c_bmpSmallFlashCCCA8888) + 3,
+};
+
+
+
+
+extern const arm_2d_tile_t c_tileSmallFlashMask;
+
+ARM_SECTION("arm2d.tile.c_tileSmallFlashMask")
+const arm_2d_tile_t c_tileSmallFlashMask = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_COLOUR_8BIT,
+        },
+    },
+    .pchBuffer = (uint8_t *)c_bmpSmallFlashAlpha,
+};
+
+
+
+
+extern const arm_2d_tile_t c_tileSmallFlashA1Mask;
+
+ARM_SECTION("arm2d.tile.c_tileSmallFlashA1Mask")
+const arm_2d_tile_t c_tileSmallFlashA1Mask = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_COLOUR_MASK_A1,
+        },
+    },
+    .pchBuffer = (uint8_t *)c_bmpSmallFlashA1Alpha,
+};
+
+
+
+
+extern const arm_2d_tile_t c_tileSmallFlashA2Mask;
+
+ARM_SECTION("arm2d.tile.c_tileSmallFlashA2Mask")
+const arm_2d_tile_t c_tileSmallFlashA2Mask = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_COLOUR_MASK_A2,
+        },
+    },
+    .pchBuffer = (uint8_t *)c_bmpSmallFlashA2Alpha,
+};
+
+
+
+
+extern const arm_2d_tile_t c_tileSmallFlashA4Mask;
+
+ARM_SECTION("arm2d.tile.c_tileSmallFlashA4Mask")
+const arm_2d_tile_t c_tileSmallFlashA4Mask = {
+    .tRegion = {
+        .tSize = {
+            .iWidth = 7,
+            .iHeight = 16,
+        },
+    },
+    .tInfo = {
+        .bIsRoot = true,
+        .bHasEnforcedColour = true,
+        .tColourInfo = {
+            .chScheme = ARM_2D_COLOUR_MASK_A4,
+        },
+    },
+    .pchBuffer = (uint8_t *)c_bmpSmallFlashA4Alpha,
+};
+
+
+
+#if defined(__clang__)
+#   pragma clang diagnostic pop
+#elif defined(__IS_COMPILER_ARM_COMPILER_5__)
+#   pragma diag_warning=1296
+#endif
+
+
