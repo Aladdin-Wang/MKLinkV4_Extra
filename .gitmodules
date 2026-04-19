@@ -10,3 +10,6 @@
 [submodule "external/MicroBootLoader"]
 	path = external/MicroBootLoader
 	url = https://github.com/Aladdin-Wang/MicroBootLoader.git
+[submodule "MicroBootLoader"]
+	path = MicroBootLoader
+	url = https://github.com/Aladdin-Wang/MicroBootRom
